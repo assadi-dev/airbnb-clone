@@ -29,12 +29,7 @@ export default function Home({ exploreData, cardsData }) {
     }
   }, [inView]);
   return (
-    <motion.div
-      exit={{ opacity: 0 }}
-      initial="initial"
-      animate="animate"
-      className=""
-    >
+    <motion.div exit={{ opacity: 0 }} className="">
       <Head>
         <title> Airbnb - clone </title> <link rel="icon" href="/favicon.ico " />{" "}
       </Head>
