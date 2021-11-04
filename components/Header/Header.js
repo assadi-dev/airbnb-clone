@@ -78,7 +78,7 @@ const Header = ({ placeholder }) => {
         />
         <SearchIcon
           className="hidden md:inline-flex h-8 
-        bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2"
+        bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2 active:scale-105 transition duration-150"
         />
       </div>
       {/** right section */}
