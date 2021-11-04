@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 function SmallCard({ img, location, distance }) {
   return (
@@ -8,9 +9,14 @@ function SmallCard({ img, location, distance }) {
      space-x-4 rounded-xl cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out"
     >
       {/**Left */}
-      <div className="relative h-16 w-16 ">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ type: "easing", duration: 1 }}
+        className="relative h-16 w-16 "
+      >
         <Image src={img} layout="fill" className="rounded-lg" />
-      </div>
+      </motion.div>
       {/**Middle */}
       <div>
         <h2>{location}</h2>

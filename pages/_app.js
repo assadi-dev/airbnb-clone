@@ -1,7 +1,12 @@
-import 'tailwindcss/tailwind.css'
+import "tailwindcss/tailwind.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <AnimatePresence exitBeforeEnter>
+      <Component {...pageProps} />
+    </AnimatePresence>
+  );
 }
 
-export default MyApp
+export default MyApp;
