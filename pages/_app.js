@@ -16,11 +16,7 @@ Router.events.on("routeChangeComplete", progress.finish);
 Router.events.on("routeChangeError", progress.finish);
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <AnimatePresence exitBeforeEnter>
-      <Component {...pageProps} />
-    </AnimatePresence>
-  );
+  return <Component {...pageProps} />;
 }
 
 export default MyApp;
