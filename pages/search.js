@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import { format } from "date-fns";
 import InfoCard from "../components/InfoCard/InfoCard";
 import { motion } from "framer-motion";
+import Map from "../components/Map/Map";
 
 function Search({ searchResults }) {
   const router = useRouter();
@@ -14,14 +15,14 @@ function Search({ searchResults }) {
 
   const fadeInUp = {
     hidden: {
-      x: -50,
+      x: -30,
       opacity: 0,
     },
     show: {
       x: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.3,
         type: "easing",
       },
     },
@@ -42,11 +43,11 @@ function Search({ searchResults }) {
       <main className="flex mb-8">
         <section className="flex-grow pt-14 px-6">
           <motion.div
-            initial={{ x: -50, opacity: 0 }}
+            initial={{ x: -30, opacity: 0 }}
             animate={{
               x: 0,
               opacity: 1,
-              transition: { type: "easing-out", duration: 0.5 },
+              transition: { type: "easing-out", duration: 0.4 },
             }}
           >
             <p className="text-xs">
@@ -94,6 +95,20 @@ function Search({ searchResults }) {
                 )
               )}
             </motion.div>
+          </motion.div>
+        </section>
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <motion.div
+            className="w-full"
+            initial={{ x: "40vw", opacity: 0 }}
+            animate={{
+              x: 0,
+              opacity: 1,
+
+              transition: { type: "easing", duration: 0.5 },
+            }}
+          >
+            <Map searchResults={searchResults} />
           </motion.div>
         </section>
       </main>
