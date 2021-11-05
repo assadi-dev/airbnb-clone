@@ -36,7 +36,7 @@ export default function Home({ exploreData, cardsData }) {
   };
 
   return (
-    <motion.div exit={{ opacity: 0 }} className="">
+    <motion.div className="">
       <Head>
         <title> Airbnb - clone </title> <link rel="icon" href="/favicon.ico " />{" "}
       </Head>
