@@ -17,8 +17,6 @@ export default function Home({ exploreData, cardsData }) {
 
   const [showContent, setShowContent] = useState(false);
 
-  const animation = useAnimation();
-
   useEffect(() => {
     if (inView) {
       setShowContent(true);
