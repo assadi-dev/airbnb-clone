@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
 import "../public/css/global.css";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
 
@@ -16,7 +16,11 @@ Router.events.on("routeChangeComplete", progress.finish);
 Router.events.on("routeChangeError", progress.finish);
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <AnimatePresence exitBeforeEnter>
+      <Component {...pageProps} />
+    </AnimatePresence>
+  );
 }
 
 export default MyApp;

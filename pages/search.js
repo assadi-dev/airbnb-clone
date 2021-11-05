@@ -1,9 +1,9 @@
-import React from "react";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import { useRouter } from "next/dist/client/router";
 import { format } from "date-fns";
 import InfoCard from "../components/InfoCard/InfoCard";
+import { motion } from "framer-motion";
 
 function Search({ searchResults }) {
   const router = useRouter();
@@ -12,7 +12,6 @@ function Search({ searchResults }) {
   const formatEndDate = format(new Date(endDate), "dd MMMM yyyy");
   const range = `${formatStartDate} - ${formatEndDate}`;
 
-  const easing = [0.6, -0.05, 0.01, 0.99];
   const fadeInUp = {
     hidden: {
       x: -50,
@@ -42,7 +41,7 @@ function Search({ searchResults }) {
       />
       <main className="flex mb-8">
         <section className="flex-grow pt-14 px-6">
-          <div
+          <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{
               x: 0,
@@ -74,13 +73,13 @@ function Search({ searchResults }) {
                 More filters
               </p>
             </div>
-            <div variants={stagger} initial="hidden" animate="show">
+            <motion.div variants={stagger} initial="hidden" animate="show">
               {searchResults?.map(
                 (
                   { img, title, location, description, star, price, total },
                   index
                 ) => (
-                  <div variants={fadeInUp}>
+                  <motion.div variants={fadeInUp}>
                     <InfoCard
                       key={index}
                       title={title}
@@ -91,11 +90,11 @@ function Search({ searchResults }) {
                       price={price}
                       total={total}
                     />
-                  </div>
+                  </motion.div>
                 )
               )}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
       </main>
       <Footer />
