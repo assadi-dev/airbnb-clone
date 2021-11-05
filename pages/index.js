@@ -7,27 +7,36 @@ import MediumCard from "../components/MediumCard/MediumCard";
 import SmallCard from "../components/SmallCard/SmallCard";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAnimation } from "framer-motion";
 
 export default function Home({ exploreData, cardsData }) {
   const { ref, inView } = useInView({
-    threshold: 0.5,
+    threshold: 0.1,
   });
+
+  const [showContent, setShowContent] = useState(false);
 
   const animation = useAnimation();
 
   useEffect(() => {
     if (inView) {
-      console.log(ref);
-      animation.start({
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        transition: { type: "spring", duration: 1, bounce: 0.3 },
-      });
+      setShowContent(true);
     }
   }, [inView]);
+
+  const fadeInUp = {
+    hidden: {
+      x: 50,
+      opacity: 0,
+    },
+    show: { x: 0, opacity: 1, transition: { type: "ease-out", duration: 0.5 } },
+  };
+  const stagger = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.5 } },
+  };
+
   return (
     <motion.div exit={{ opacity: 0 }} className="">
       <Head>
@@ -41,40 +50,44 @@ export default function Home({ exploreData, cardsData }) {
         <section className="pt-6">
           <h2 className="text-4xl font-semibold">Explore NearBy</h2>
           {/** Pull some data from a server - API endpoints */}
+
           <motion.div
-            ref={ref}
+            variants={stagger}
+            initial="hidden"
+            animate="show"
             className="grid grid-cols-1 
           sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
             {exploreData?.map((item, index) => (
-              <motion.div
-                key={index}
-                animate={animation}
-                initial={{
-                  y: "10vh",
-                  opacity: 0,
-                }}
-              >
-                <SmallCard
-                  img={item.img}
-                  location={item.location}
-                  distance={item.distance}
-                  animation={animation}
-                />
-              </motion.div>
+              <SmallCard
+                img={item.img}
+                location={item.location}
+                distance={item.distance}
+              />
             ))}
           </motion.div>
         </section>
         <section>
           <h2 className="text-4xl font-semibold py-8">Live Anywehre</h2>
-          <div className="flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3 md:justify-between">
-            {cardsData?.map((item, index) => (
-              <MediumCard key={index} img={item.img} title={item.title} />
-            ))}
+          <div ref={ref} className="my-5">
+            {showContent && (
+              <motion.div
+                className="flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3 md:justify-between"
+                variants={stagger}
+                initial="hidden"
+                animate="show"
+              >
+                {cardsData?.map((item, index) => (
+                  <motion.div key={index} variants={fadeInUp}>
+                    <MediumCard img={item.img} title={item.title} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
           </div>
         </section>
         <section className="relative py-16">
-          <div initial={{ opacity: 0 }}>
+          <div>
             <LargeCard
               img="https://links.papareact.com/4cj"
               title="The Greatest Outdoors"

@@ -13,7 +13,6 @@ function Search({ searchResults }) {
   const formatEndDate = format(new Date(endDate), "dd MMMM yyyy");
   const range = `${formatStartDate} - ${formatEndDate}`;
 
-  const easing = [0.6, -0.05, 0.01, 0.99];
   const fadeInUp = {
     hidden: {
       x: -50,
