@@ -34,7 +34,7 @@ const Header = ({ placeholder }) => {
     key: "selection",
   };
 
-  const search = (e) => {
+  const search = () => {
     router.push({
       pathname: "/search",
       query: {
